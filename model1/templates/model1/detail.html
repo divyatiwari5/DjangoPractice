@@ -1,0 +1,30 @@
+<h1>Options List</h1>
+
+<h1>{{ question.quest_text }}</h1>
+
+{% if error_message %} <p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'model1:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter}}" value="{{ choice.id }}"/>
+        <label for="choice{{ forloop.counter}}">{{ choice.choice_text}}</label><br/>
+    {% endfor %}
+    <input type="submit" value="Vote">
+</form>
+
+
+
+{% comment %}
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'model1:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>{% endcomment %}
